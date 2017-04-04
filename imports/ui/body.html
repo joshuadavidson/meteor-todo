@@ -1,17 +1,31 @@
 <body>
   <div class="container">
     <header>
-      <h1>Todo List</h1>
+      <img src="http://ruths.ai/wp-content/uploads/2016/06/logo-ruths-reversed-2.png" alt="Ruths.ai">
+      <br>
+      <h1>Todo List ({{incompleteCount}})</h1>
 
+      <div class="menu-container">
+        <label class="hide-completed">
+          Hide Completed Tasks
+          <input type="checkbox" />
+        </label>
+
+        {{> loginButtons align="right"}}
+      </div>
+    </header>
+
+    {{#if currentUser}}
       <form class="new-task">
         <input type="text" name="text" placeholder="Type to add new tasks" />
       </form>
-    </header>
+    {{/if}}
 
     <ul>
       {{#each tasks}}
         {{> task}}
       {{/each}}
     </ul>
+
   </div>
 </body>

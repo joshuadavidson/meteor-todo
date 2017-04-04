@@ -1,9 +1,35 @@
 <template name="task">
-  <li class="{{#if checked}}checked{{/if}}">
-    <button class="delete">&times;</button>
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
-    <span class="text">{{text}}</span>
+    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+
+    <div class="actions-container">
+
+      {{#if isOwner}}
+      <button class="toggle-private">
+        {{#if private}}
+        Private <i class="fa fa-eye-slash"></i>
+        {{else}}
+        Public <i class="fa fa-eye"></i>
+        {{/if}}
+      </button>
+      {{/if}}
+
+      <button class="comment-toggle">
+        <i class="fa fa-comments"></i>
+      </button>
+
+      <button class="delete">
+        <i class="fa fa-trash"></i>
+      </button>
+
+    </div>
+
   </li>
+
+  <!-- <div class="">
+    test
+  </div> -->
 </template>
