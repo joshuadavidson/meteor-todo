@@ -3,9 +3,11 @@
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
-    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+    <span class="text">{{text}}</span>
 
     <div class="actions-container">
+
+      <span>Owner: {{username}}</span>
 
       {{#if isOwner}}
       <button class="toggle-private">
@@ -17,7 +19,7 @@
       </button>
       {{/if}}
 
-      <button class="comment-toggle">
+      <button class="toggle-comments">
         <i class="fa fa-comments"></i>
       </button>
 
@@ -28,8 +30,9 @@
     </div>
 
   </li>
-
-  <!-- <div class="">
-    test
-  </div> -->
+  {{#if showComments}}
+    <!-- {{#each comment}} -->
+      {{> comment}}
+    <!-- {{/if}} -->
+  {{/if}}
 </template>

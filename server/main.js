@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-import '../imports/api/tasks.js';
+// Task components
+import '../imports/api/tasks/publication.js';
+import '../imports/api/tasks/methods.js';
 
 Meteor.startup(() => {
   // code to run on server at startup

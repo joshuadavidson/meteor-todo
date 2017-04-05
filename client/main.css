@@ -25,6 +25,20 @@ header {
   position: relative;
 }
 
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
 #login-buttons {
   padding: 4px 0 0 10px;
   display: block;
@@ -33,14 +47,6 @@ header {
 
 .menu-container {
   float: right;
-}
-
-h1 {
-  font-size: 1.5em;
-  margin: 0;
-  margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
 }
 
 .new-task input {
@@ -54,13 +60,8 @@ h1 {
   outline: none;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
-}
-
 .actions-container {
+  font-size: 13.33px;
   float: right;
 }
 
@@ -69,7 +70,7 @@ ul {
   border: none;
 }
 
-.comment-toggle {
+.toggle-comments {
   background: none;
   border: none;
 }
@@ -107,13 +108,28 @@ header .hide-completed {
 
 }
 
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
+/* Comment Component */
+.comment-container {
+  padding: 15px 15px 15px 50px;
+  border: #ddd solid 1px;
+}
 
-  .search {
-    width: 150px;
-    clear: both;
-  }
+.author {
+  margin: 0;
+  padding: 2px 0 2px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.date {
+  margin: 0;
+  padding: 2px 0 2px 0;
+  font-size: 10px;
+}
+
+.comment {
+  margin: 0;
+  padding: 2px 0 2px 0;
+  font-size: 12px;
+  width: 100%;
 }
