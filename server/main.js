@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 // Task components
-import '../imports/api/tasks/publication.js';
+import '../imports/api/tasks/publications.js';
 import '../imports/api/tasks/methods.js';
 
 Meteor.startup(() => {
