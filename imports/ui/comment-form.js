@@ -1,1 +1,0 @@
-import './comment-form.html';

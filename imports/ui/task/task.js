@@ -2,11 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
+// Component templates
 import './task.html';
 
-import '../comment/comment.js';
+// Import external components used within
+import '../comment/thread.js';
+import '../comment/addComment.js';
 
-Template.task.onCreated(function bodyOnCreated() {
+Template.task.onCreated(function taskOnCreated() {
   this.state = new ReactiveDict();
   this.state.set('showComments', false);
 });

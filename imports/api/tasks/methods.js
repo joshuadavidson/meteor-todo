@@ -14,9 +14,10 @@ Meteor.methods({
 
     Tasks.insert({
       text,
-      cratedAt: new Date(),
+      createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
+      type: 'task',
     });
   },
 

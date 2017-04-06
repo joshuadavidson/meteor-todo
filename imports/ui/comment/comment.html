@@ -1,10 +1,45 @@
 <template name="comment">
 
   <div class="comment-container">
-    <p class="author">Admin</p>
-    <p class="date">Tuesday, April 4th, 2017</p>
-    <p class="comment">Lorem ipsum dolor sit amet, ignota fabulas voluptua ex has. No veniam iracundia his, dictas blandit senserit vis et, usu id velit laoreet albucius. Nam reque clita cu. Diam persecuti cu mel, eu vero sapientem vim. Mei cu magna ignota labitur, duo meis similique ad, vim in brute cetero adipisci. Pro ex tota postea. Solum antiopam constituto an sea, an pri cibo viderer noluisse.
+    <p class="comment-author">
+      {{#if isComment}}
+        <i class="fa fa-comment"></i>
+      {{else}}
+        <i class="fa fa-chevron-right"></i>
+      {{/if}}
+      <span>{{getUsername}}</span>
     </p>
+    <p class="comment-date">Created: {{createdAt}}</p>
+    {{#if updatedAt}}
+      <p class="comment-date">Updated: {{updatedAt}}</p>
+    {{/if}}
+    <p class="comment-content">{{content}}</p>
+
+    <div class="">
+      {{#if hasReplies}}
+        <button class="comment-show-replies-btn" data-id="{{_id}}">
+          {{#if showReplies}}
+            <i class="fa fa-angle-up"></i> Hide Replies
+          {{else}}
+            <i class="fa fa-angle-down"></i> Show {{this.numReplies}} Replies
+          {{/if}}
+        </button>
+      {{/if}}
+      <button class="comment-reply-btn" data-id="{{_id}}" ><i class="fa fa-reply"></i> Reply</button>
+      <button class="comment-like-btn" data-id="{{_id}}"><i class="fa fa-thumbs-up"></i> Like - {{numLikes}}</button>
+    </div>
   </div>
+
+  <div class="comment-reply-container">
+    {{#if showAddReply}}
+      {{> addComment parentId=_id}}
+    {{/if}}
+  </div>
+
+  {{#if showReplies}}
+    <div class="comment-reply-container">
+      {{> thread externalId=_id type="reply"}}
+    </div>
+  {{/if}}
 
 </template>
