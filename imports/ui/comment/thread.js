@@ -15,7 +15,7 @@ import { Comments } from '../../api/comments/models.js';
 Template.thread.onCreated(function ThreadOnCreated() {
   const instance = Template.instance();
 
-  Meteor.subscribe('comments', instance.data.externalId, instance.data.type);
+  Meteor.subscribe('comments');
 });
 
 Template.thread.helpers({
@@ -23,9 +23,16 @@ Template.thread.helpers({
     const instance = Template.instance();
 
     // Retrieve only commments that match parentId and type
-    return Comments.find({
-      parentId: instance.data.externalId,
-      type: instance.data.type,
-    });
+    return Comments.find(
+      {
+        parentId: instance.data.externalId,
+        type: instance.data.type,
+      },
+      {
+        sort: {
+          createdAt: -1,
+        },
+      },
+    );
   },
 });

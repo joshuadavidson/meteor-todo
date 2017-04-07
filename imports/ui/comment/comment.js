@@ -12,6 +12,8 @@ import './addComment.js';
 // Setup inital state on component creation
 Template.comment.onCreated(function commentOnCreated() {
   this.state = new ReactiveDict();
+
+  Meteor.subscribe('comments');
 });
 
 Template.comment.onRendered(function commentOnRendered() {

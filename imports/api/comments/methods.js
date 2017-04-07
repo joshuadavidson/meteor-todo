@@ -12,8 +12,9 @@ Meteor.methods({
 
     let type;
 
+    // Determine if parent is comment or task to set type
+    // if doc doesn't exist in comments then it is task
     const parentDoc = Comments.findOne(parentId);
-
     if (parentDoc && parentDoc.type === 'comment') {
       type = 'reply';
     }
@@ -21,8 +22,7 @@ Meteor.methods({
       type = 'comment';
     }
 
-    console.log('Type: '+type);
-
+    // Add the new comment
     Comments.insert({
       authorId: Meteor.userId(),
       createdAt: new Date(),
@@ -33,6 +33,15 @@ Meteor.methods({
       type,
       content,
     });
+
+    // if comment was a reply then update the numReplies on parent
+    if (type === 'reply') {
+      Comments.update(parentId, {
+        $inc: {
+          numReplies: 1,
+        },
+      });
+    }
   },
 
   'comments.like'(commentId) {
