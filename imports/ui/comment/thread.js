@@ -11,7 +11,6 @@ import './addComment.js';
 // Import API files
 import { Comments } from '../../api/comments/models.js';
 
-
 Template.thread.onCreated(function ThreadOnCreated() {
   const instance = Template.instance();
 

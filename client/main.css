@@ -44,6 +44,10 @@ button {
   background: none;
 }
 
+input {
+  font-size: 12px;
+}
+
 #login-buttons {
   padding: 4px 0 0 10px;
   display: block;
@@ -134,7 +138,7 @@ header .hide-completed {
 
 .comment-content {
   margin: 0;
-  padding: 2px 0 2px 0;
+  padding: 3px 0 3px 0;
   font-size: 12px;
   width: 100%;
 }
@@ -151,11 +155,19 @@ header .hide-completed {
   font-size: 10px;
 }
 
+.comment-edit-btn {
+  font-size: 10px;
+}
+
 .comment-show-replies-btn {
   font-size: 10px;
 }
 
-.comment-form-container {
+.comment-add-form {
   padding: 5px 15px 5px 50px;
-  /*border: #ddd solid 1px;*/
+}
+
+.comment-edit-form {
+  font-size: 10px;
+
 }

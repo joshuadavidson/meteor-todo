@@ -3,8 +3,6 @@ import { check } from 'meteor/check';
 
 import { Comments } from './models.js';
 
-// TODO: insert method is just example for now
-
 Meteor.methods({
   'comments.add'(parentId, content) {
     check(parentId, String);
@@ -25,6 +23,7 @@ Meteor.methods({
     // Add the new comment
     Comments.insert({
       authorId: Meteor.userId(),
+      authorName: Meteor.user().username,
       createdAt: new Date(),
       modifiedAt: new Date(),
       numReplies: 0,
@@ -42,6 +41,19 @@ Meteor.methods({
         },
       });
     }
+  },
+
+  'comments.edit'(_id, content) {
+    check(_id, String);
+    check(content, String);
+
+    // Update the content as well as modifiedAt date
+    Comments.update(_id, {
+      $set: {
+        content,
+        modifiedAt: new Date(),
+      },
+    });
   },
 
   'comments.like'(commentId) {

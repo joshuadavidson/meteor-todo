@@ -10,6 +10,10 @@ Comments.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
   },
 
+  authorName: {
+    type: String,
+  },
+
   createdAt: {
     type: Date,
     defaultValue: new Date(),

@@ -12,6 +12,10 @@ import './addComment.js';
 // Setup inital state on component creation
 Template.comment.onCreated(function commentOnCreated() {
   this.state = new ReactiveDict();
+  // Detemine whether to show modified date by comparing dates
+  const instance = Template.instance();
+
+  instance.state.set('showModifiedAt', this.data.createdAt != this.data.modifiedAt);
 
   Meteor.subscribe('comments');
 });
@@ -39,26 +43,48 @@ Template.comment.onRendered(function commentOnRendered() {
   instance.$(`.comment-reply-btn[data-id=${id}]`).on('click', function onClick() {
     instance.state.set('showAddReply', !instance.state.get('showAddReply'));
   });
+
+  // Handle toggle of edit button
+  instance.$(`.comment-edit-btn[data-id=${id}]`).on('click', function onClick() {
+    instance.state.set('showEditForm', !instance.state.get('showEditForm'));
+  });
 });
 
 Template.comment.helpers({
   isComment() {
     return this.type === 'comment';
   },
-  getUsername() {
-    return Meteor.users.findOne({
-      _id: this.authorId,
-    }).username;
+  isAuthor() {
+    return this.authorId === Meteor.userId();
+  },
+  showModifiedAt() {
+    const instance = Template.instance();
+    return instance.state.get('showModifiedAt');
   },
   showReplies() {
     const instance = Template.instance();
     return instance.state.get('showReplies');
   },
-  showAddReply() {
+  showReplyForm() {
     const instance = Template.instance();
     return instance.state.get('showAddReply');
   },
+  showEditForm() {
+    const instance = Template.instance();
+    return instance.state.get('showEditForm');
+  },
   hasReplies() {
     return this.numReplies;
+  },
+});
+
+Template.comment.events({
+  'submit .comment-edit-form'(event, templateInstance) {
+    // prevent default browser form submit
+    event.preventDefault();
+
+    Meteor.call('comments.edit', this._id, event.target.content.value);
+    templateInstance.state.set('showEditForm', false);
+    templateInstance.state.set('showModifiedAt', true);
   },
 });

@@ -7,39 +7,60 @@
       {{else}}
         <i class="fa fa-chevron-right"></i>
       {{/if}}
-      <span>{{getUsername}}</span>
+      <span>{{authorName}}</span>
     </p>
     <p class="comment-date">Created: {{createdAt}}</p>
-    {{#if updatedAt}}
-      <p class="comment-date">Updated: {{updatedAt}}</p>
+    {{#if showModifiedAt}}
+      <p class="comment-date">Updated: {{modifiedAt}}</p>
     {{/if}}
-    <p class="comment-content">{{content}}</p>
 
-    <div class="">
-      {{#if hasReplies}}
-        <button class="comment-show-replies-btn" data-id="{{_id}}">
-          {{#if showReplies}}
-            <i class="fa fa-angle-up"></i> Hide Replies
-          {{else}}
-            <i class="fa fa-angle-down"></i> Show {{this.numReplies}} Replies
-          {{/if}}
-        </button>
-      {{/if}}
-      <button class="comment-reply-btn" data-id="{{_id}}" ><i class="fa fa-reply"></i> Reply</button>
-      <button class="comment-like-btn" data-id="{{_id}}"><i class="fa fa-thumbs-up"></i> Like - {{numLikes}}</button>
-    </div>
+    {{#if showEditForm}}
+      <form class="comment-edit-form" data-id="{{_id}}">
+        <input type="text" name="content" value="{{content}}"/><br>
+      </form>
+    {{else}}
+      <p class="comment-content">{{content}}</p>
+    {{/if}}
+
+    <button class="comment-reply-btn" data-id="{{_id}}" ><i class="fa fa-reply"></i> Reply</button>
+
+    {{#if isAuthor}}
+      <button class="comment-edit-btn" data-id="{{_id}}">
+        {{#if showEditForm}}
+        <i class="fa fa-save"></i> Save
+        {{else}}
+          <i class="fa fa-pencil"></i> Edit
+        {{/if}}
+      </button>
+    {{/if}}
+
+    <button class="comment-like-btn" data-id="{{_id}}"><i class="fa fa-thumbs-up"></i> Like - {{numLikes}}</button>
+
+    {{#if hasReplies}}
+      <button class="comment-show-replies-btn" data-id="{{_id}}">
+        {{#if showReplies}}
+        <i class="fa fa-angle-up"></i> Hide Replies
+        {{else}}
+        <i class="fa fa-angle-down"></i> Show {{this.numReplies}} Replies
+        {{/if}}
+      </button>
+    {{/if}}
   </div>
 
-  <div class="comment-reply-container">
-    {{#if showAddReply}}
+  {{#if showReplyForm}}
+    <div class="comment-reply-container">
       {{> addComment parentId=_id}}
-    {{/if}}
-  </div>
+    </div>
+  {{/if}}
 
   {{#if showReplies}}
     <div class="comment-reply-container">
       {{> thread externalId=_id type="reply"}}
     </div>
+  {{/if}}
+
+  {{#if showEditForm}}
+    <p>edit form</p>
   {{/if}}
 
 </template>
