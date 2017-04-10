@@ -15,7 +15,7 @@ Template.comment.onCreated(function commentOnCreated() {
   // Detemine whether to show modified date by comparing dates
   const instance = Template.instance();
 
-  instance.state.set('showModifiedAt', this.data.createdAt != this.data.modifiedAt);
+  instance.state.set('showModifiedAt', this.data.createdAt.toString() !== this.data.modifiedAt.toString());
 
   Meteor.subscribe('comments');
 });
@@ -28,11 +28,6 @@ Template.comment.onRendered(function commentOnRendered() {
   // used ID here get unique instance event handler not
   // available in Template.comments.events
   // TODO: look into cleaner implementation
-
-  // Handle toggle of show replies button
-  instance.$(`.comment-show-replies-btn[data-id="${id}"]`).on('click', function onClick() {
-    instance.state.set('showReplies', !instance.state.get('showReplies'));
-  });
 
   // Handle like button
   instance.$(`.comment-like-btn[data-id=${id}]`).on('click', function onClick() {
@@ -61,10 +56,6 @@ Template.comment.helpers({
     const instance = Template.instance();
     return instance.state.get('showModifiedAt');
   },
-  showReplies() {
-    const instance = Template.instance();
-    return instance.state.get('showReplies');
-  },
   showReplyForm() {
     const instance = Template.instance();
     return instance.state.get('showAddReply');
@@ -72,9 +63,6 @@ Template.comment.helpers({
   showEditForm() {
     const instance = Template.instance();
     return instance.state.get('showEditForm');
-  },
-  hasReplies() {
-    return this.numReplies;
   },
 });
 

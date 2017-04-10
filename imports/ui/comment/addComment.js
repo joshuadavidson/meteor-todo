@@ -7,6 +7,7 @@ import './addComment.html';
 Template.addComment.onRendered(function commentOnRendered() {
   const instance = Template.instance();
   const parentId = instance.data.parentId;
+  const type = instance.data.type;
 
   // event handlers got tricky here
   // used ID here get unique instance event handler not
@@ -17,7 +18,7 @@ Template.addComment.onRendered(function commentOnRendered() {
   instance.$(`.comment-add-form[data-id=${parentId}]`).on('submit', function onSubmit(event) {
     // Prevent default browser form submit
     event.preventDefault();
-    Meteor.call('comments.add', parentId, event.target.content.value);
+    Meteor.call('comments.add', parentId, event.target.content.value, type);
   });
 });
 

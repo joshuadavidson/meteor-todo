@@ -34,33 +34,23 @@
       </button>
     {{/if}}
 
-    <button class="comment-like-btn" data-id="{{_id}}"><i class="fa fa-thumbs-up"></i> Like - {{numLikes}}</button>
+    <button class="comment-like-btn" data-id="{{_id}}"><i class="fa fa-thumbs-up">
+      </i> Like - {{numLikes}}
+    </button>
 
-    {{#if hasReplies}}
-      <button class="comment-show-replies-btn" data-id="{{_id}}">
-        {{#if showReplies}}
-        <i class="fa fa-angle-up"></i> Hide Replies
-        {{else}}
-        <i class="fa fa-angle-down"></i> Show {{this.numReplies}} Replies
-        {{/if}}
-      </button>
-    {{/if}}
+    <button class="comment-show-replies-btn" data-id="{{_id}}">
+      <i class="fa fa-angle-down"></i> {{numReplies}} Replies
+    </button>
   </div>
 
   {{#if showReplyForm}}
     <div class="comment-reply-container">
-      {{> addComment parentId=_id}}
+      {{> addComment parentId=_id type="reply"}}
     </div>
   {{/if}}
 
-  {{#if showReplies}}
-    <div class="comment-reply-container">
-      {{> thread externalId=_id type="reply"}}
-    </div>
-  {{/if}}
-
-  {{#if showEditForm}}
-    <p>edit form</p>
-  {{/if}}
+  <div class="comment-reply-container">
+    {{> thread externalId=_id type="reply"}}
+  </div>
 
 </template>
